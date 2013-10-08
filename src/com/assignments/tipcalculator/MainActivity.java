@@ -2,6 +2,8 @@ package com.assignments.tipcalculator;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -19,7 +21,26 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         etAmount = (EditText) findViewById(R.id.etAmount);
         tvFinalAmt = (TextView) findViewById(R.id.tvFinalAmt);
+        etAmount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+            	tvFinalAmt = (TextView) findViewById(R.id.tvFinalAmt);
+    	    	tvFinalAmt.setText("");
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // TODO Auto-generated method stub
+               
+            }
+        });
     }
+            
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -28,7 +49,7 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    public void funcTip(View v){
+    public void calculateTip(View v){
     	Float amtValue = null;
     	try {
     		amtValue = Float.valueOf(etAmount.getText().toString());
